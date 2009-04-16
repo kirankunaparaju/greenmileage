@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Allows creating or editing of fillups
+Author: Connor Garvey
+Created: Nov 6, 2008
+Version 0.0.4
+Since 0.0.1
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="7dip">
+  <TextView android:id="@+id/volumeLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/label_volume" />
+  <ImageButton android:id="@+id/pickVolume"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@id/volumeLabel"
+      android:layout_alignParentRight="true"
+      android:src="@android:drawable/ic_dialog_dialer" />
+  <EditText android:id="@+id/volume"
+      android:background="@android:drawable/editbox_background"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/volumeLabel"
+      android:layout_alignParentLeft="true"
+      android:layout_toLeftOf="@id/pickVolume" />
+  <TextView android:id="@+id/mileageLabel"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="@string/label_mileage"
+      android:layout_below="@id/volume" />
+  <ImageButton android:id="@+id/pickMileage"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@id/mileageLabel"
+      android:layout_alignParentRight="true"
+      android:src="@android:drawable/ic_dialog_dialer" />
+	<EditText android:id="@+id/mileage" 
+      android:numeric="integer"
+      android:background="@android:drawable/editbox_background"
+	    android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:layout_below="@id/mileageLabel"
+      android:layout_alignParentLeft="true"
+      android:layout_toLeftOf="@id/pickVolume" />
+  <TextView android:id="@+id/priceLabel"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:text="@string/label_price"
+      android:layout_below="@id/mileage" />
+  <ImageButton android:id="@+id/pickPrice"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@id/priceLabel"
+      android:layout_alignParentRight="true"
+      android:src="@android:drawable/ic_dialog_dialer" />
+  <EditText android:id="@+id/price" 
+      android:background="@android:drawable/editbox_background"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_below="@id/priceLabel"
+      android:layout_alignParentLeft="true"
+      android:layout_toLeftOf="@id/pickPrice" />
+  <TextView android:id="@+id/dateLabel"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:text="@string/label_date"
+      android:layout_below="@id/price" />
+  <TextView android:id="@+id/date"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_below="@id/dateLabel" />
+  <Button android:id="@+id/pickDate"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/date"
+      android:layout_alignTop="@id/date"
+      android:layout_alignParentRight="true"
+      android:text="@string/message_pickDate" />
+  <Button android:id="@+id/save"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:text="@string/message_save" />
+</RelativeLayout>

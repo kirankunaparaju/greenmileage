@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+The application manifest
+Author: Connor Garvey
+Created: Nov 6, 2008
+Version: 0.0.3
+Since: 0.0.1
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="org.greenmileage" android:versionCode="6" android:versionName="0.0.3">
+  <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <provider android:name="GreenMileageProvider"
+      android:authorities="org.greenmileage.GreenMileageDefinitions" />
+    <activity android:name="FillupList" android:label="@string/app_name">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <action android:name="android.intent.action.EDIT" />
+        <action android:name="android.intent.action.PICK" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="vnd.android.cursor.dir/vnd.greenmileage.fillup" />
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.GET_CONTENT" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="vnd.android.cursor.dir/vnd.greenmileage.fillup" />
+      </intent-filter>
+    </activity>
+    <activity android:name="FillupEditor" 
+        android:label="@string/message_editFillup">
+      <!-- View single fillup filter -->
+      <intent-filter android:label="@string/resolve_editFillup">
+        <action android:name="android.intent.action.VIEW" />
+        <action android:name="android.intent.action.EDIT" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="vnd.android.cursor.item/vnd.greenmileage.fillup" />
+      </intent-filter>
+      <!-- Filter to add a fillup in a directory of fillups -->
+      <intent-filter>
+        <action android:name="android.intent.action.INSERT" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="vnd.android.cursor.dir/vnd.greenmileage.fillup" />
+      </intent-filter>
+    </activity>
+    <activity android:name="GreenStatistics" 
+        android:label="@string/message_greenStatistics">
+      <!-- View statistics filter -->
+      <intent-filter android:label="@string/resolve_viewStatistics">
+        <!-- Handle any intent with this name -->
+        <action android:name="org.greenmileage.intent.ACTION_VIEW_STATISTICS" />
+        <!-- Intents must always have a category and Android will assign this
+            category by default -->
+        <category android:name="android.intent.category.DEFAULT" />
+        <!-- The intent data must match.  Accept request whether the selected
+            data is a single fillup or a fillup directory -->
+        <data android:mimeType="vnd.android.cursor.dir/vnd.greenmileage.fillup" />
+        <data android:mimeType="vnd.android.cursor.item/vnd.greenmileage.fillup" />
+      </intent-filter>
+    </activity>
+  </application>
+</manifest> 
