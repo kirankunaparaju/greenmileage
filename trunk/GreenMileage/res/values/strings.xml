@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Application messages
+Author: Connor Garvey
+Created: Nov 6, 2008
+Version 0.0.4
+Since 0.0.1
+-->
+<resources>
+<string name="app_name">Green Mileage</string>
+<string name="error_message_resume">There was a problem while resuming.  Please try reloading.</string>
+<string name="error_title_resume">Resume Error</string>
+<string name="label_date">Date:</string>
+<string name="label_distancePerVolume">MPG:</string>
+<string name="label_mileage">Odometer:</string>
+<string name="label_price">Price per gallon:</string>
+<string name="label_totalDistancePerVolume">Total MPG:</string>
+<string name="label_volume">Gallons:</string>
+<string name="menu_addFillup">Add fillup</string>
+<string name="menu_delete">Delete</string>
+<string name="menu_deleteFillup">Delete</string>
+<string name="menu_discard">Discard</string>
+<string name="menu_editFillup">Edit</string>
+<string name="menu_revert">Revert</string>
+<string name="menu_viewStatistics">Statistics</string>
+<string name="message_at">at</string>
+<string name="message_back">Back</string>
+<string name="message_currencySymbol">$</string>
+<string name="message_distanceAbbreviation">mi</string>
+<string name="message_distancePerVolumeAbbreviation">MPG</string>
+<string name="message_distanceUnit">mile</string>
+<string name="message_editFillup">Edit fillup</string>
+<string name="message_fillupAtMile">Fillup at mile</string>
+<string name="message_for">for</string>
+<string name="message_greenStatistics">Green Statistics</string>
+<string name="message_noFillups">No fillups saved yet.  The next time you fill your tank, press Menu to save it.</string>
+<string name="message_ok">OK</string>
+<string name="message_on">on</string>
+<string name="message_per">per</string>
+<string name="message_pick">Pick</string>
+<string name="message_pickDate">Pick date</string>
+<string name="message_save">Save</string>
+<string name="message_sinceLastFillup">since last fillup</string>
+<string name="message_total">Total</string>
+<string name="message_volumeUnit">gallon</string>
+<string name="message_volumeAbbreviation">gal</string>
+<string name="message_with">with</string>
+<string name="resolve_editFillup">Edit fillup</string>
+<string name="resolve_viewStatistics">View statistics</string>
+<string name="title_addFillup">Add Fillup</string>
+<string name="title_editFillup">Edit Fillup</string>
+<string name="title_odometer">Odometer</string>
+<string name="title_pricePerVolumeUnit">Price per gallon</string>
+<string name="title_volumeUnits">Gallons</string>
+</resources>

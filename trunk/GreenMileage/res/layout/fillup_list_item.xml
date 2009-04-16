@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+View for a fillup in a list of fillups
+Author: Connor Garvey
+Created: Nov 6, 2008
+Version: 0.0.2
+Since: 0.0.1
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dip">
+  <TextView android:id="@+id/date"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:textStyle="bold" />
+  <TextView android:id="@+id/summary"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/date" />
+  <TextView android:id="@+id/mileageSummary"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/summary" />
+</RelativeLayout>
