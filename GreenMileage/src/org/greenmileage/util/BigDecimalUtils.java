@@ -1,7 +1,7 @@
 package org.greenmileage.util;
 
-import java.math.MathContext;
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * Helps work with big decimals
@@ -15,14 +15,23 @@ public class BigDecimalUtils {
   }
   
   /**
-   * Calculates the precision of a value, including decimal digits
+   * Calculates precision by counting the number of integer digits in <code>value</code> and adding
+   * the specified number of decimal digits
    * @param value The value for which to calculate
    * @param decimals The number of decimal digits to include
-   * @return The precision
+   * @return The precision, the number of integer digits in
+   *         <code>value</value> plus the specified number of decimal digits
    */
-  public static int calculatePrecision(String value, int decimals) {
-    if (value.contains(".")) {
-      return value.substring(0, value.indexOf('.')).length() + decimals;
+  public static int calculatePrecision(final String value, final int decimals) {
+    if (value == null) {
+      throw new IllegalArgumentException("value can't be null");
+    }
+    if (decimals < 0) {
+      throw new IllegalArgumentException("decimals can't be less than 0");
+    }
+    final int decimalIndex = value.indexOf('.');
+    if (decimalIndex != -1) {
+      return decimalIndex + decimals;
     }
     else {
       return value.length() + decimals;
@@ -30,27 +39,25 @@ public class BigDecimalUtils {
   }
   
   /**
-   * Reads a decimal value from a string, handling nulls and applying a
-   * precision based on the number of decimals to include
+   * Reads a decimal value from a string, handling nulls and applying a precision based on the
+   * number of decimals to include
    * @param value The value to parse
    * @param decimals The number of decimals to include in the parsed value
    * @return The value as a big decimal or null if the input value was null
    */
-  public static BigDecimal parseForDecimalLength(String value, int decimals) {
+  public static BigDecimal parseForDecimalLength(final String value, final int decimals) {
     if (value == null) {
       return null;
     }
-    return new BigDecimal(value, new MathContext(calculatePrecision(value,
-        decimals)));
+    return new BigDecimal(value, new MathContext(calculatePrecision(value, decimals)));
   }
   
   /**
    * Gets a string representation of the value
    * @param value The value to represent
-   * @return The string representation of the big decimal or an empty string if
-   *    the value is null
+   * @return The string representation of the big decimal or an empty string if the value is null
    */
-  public static String toString(BigDecimal value) {
+  public static String toString(final BigDecimal value) {
     return value == null ? "" : value.toString();
   }
 }

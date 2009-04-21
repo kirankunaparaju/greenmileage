@@ -2,6 +2,7 @@ package org.greenmileage.data;
 
 import android.content.ContentValues;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -80,38 +81,36 @@ public class Fillup {
   /**
    * Writes a fillup to a bundle
    * @param bundle The bundle to which to write
-   * @param key The key identifying the values in the bundle. This key will be
-   *        used as a prefix for bundle values.
+   * @param key The key identifying the values in the bundle. This key will be used as a prefix for
+   *        bundle values.
    */
-  public void saveToBundle(Bundle bundle, String key) {
-    BundleUtils.putString(key + Fillups.AUTOMOBILE, this.getAutomobile(),
-        bundle);
+  public void saveToBundle(final Bundle bundle, final String key) {
+    BundleUtils.putString(key + Fillups.AUTOMOBILE, this.getAutomobile(), bundle);
     BundleUtils.putLong(key + Fillups.DATE, this.getDate().getTime(), bundle);
     BundleUtils.putInt(key + Fillups.MILEAGE, this.getMileage(), bundle);
     BundleUtils.putObjectToString(key + Fillups.PRICE, this.getPrice(), bundle);
-    BundleUtils.putObjectToString(key + Fillups.VOLUME, this.getVolume(),
-        bundle);
-    BundleUtils.putLong(key + Fillups._ID, this.getID(), bundle);
+    BundleUtils.putObjectToString(key + Fillups.VOLUME, this.getVolume(), bundle);
+    BundleUtils.putLong(key + BaseColumns._ID, this.getID(), bundle);
   }
   
   /**
    * Saves the fillup to content values
    * @param values The content values to which to save
    */
-  public void saveToContentValues(ContentValues values) {
+  public void saveToContentValues(final ContentValues values) {
     values.put(Fillups.AUTOMOBILE, this.getAutomobile());
     values.put(Fillups.DATE, this.getDate().getTime());
     values.put(Fillups.MILEAGE, this.getMileage());
     values.put(Fillups.PRICE, this.getPrice().toString());
     values.put(Fillups.VOLUME, this.getVolume().toString());
-    values.put(Fillups._ID, this.getID());
+    values.put(BaseColumns._ID, this.getID());
   }
   
   /**
    * Sets the automobile
    * @param automobile The automobile to set
    */
-  public void setAutomobile(String automobile) {
+  public void setAutomobile(final String automobile) {
     this.automobile = automobile;
   }
   
@@ -119,7 +118,7 @@ public class Fillup {
    * Sets the date
    * @param date The date to set
    */
-  public void setDate(Date date) {
+  public void setDate(final Date date) {
     this.date = date;
   }
   
@@ -128,7 +127,7 @@ public class Fillup {
    * @param dateString The date to set, formatted using {@link #DATE_FORMAT}
    * @throws ParseException Thrown if the input date could not be parsed
    */
-  public void setDateFromString(String dateString) throws ParseException {
+  public void setDateFromString(final String dateString) throws ParseException {
     Date date = null;
     if (dateString != null) {
       date = DATE_FORMAT.parse(dateString);
@@ -140,7 +139,7 @@ public class Fillup {
    * Sets the iD
    * @param id The iD to set
    */
-  public void setID(Long id) {
+  public void setID(final Long id) {
     this.iD = id;
   }
   
@@ -148,7 +147,7 @@ public class Fillup {
    * Sets the ID from a string
    * @param id The ID to set
    */
-  public void setIDFromString(String id) {
+  public void setIDFromString(final String id) {
     Long longID = null;
     if (id != null) {
       longID = new Long(Long.parseLong(id));
@@ -160,7 +159,7 @@ public class Fillup {
    * Sets the mileage
    * @param mileage The mileage to set
    */
-  public void setMileage(Integer mileage) {
+  public void setMileage(final Integer mileage) {
     this.mileage = mileage;
   }
   
@@ -168,7 +167,7 @@ public class Fillup {
    * Sets the mileage from a string
    * @param mileage The mileage to set
    */
-  public void setMileageFromString(String mileage) {
+  public void setMileageFromString(final String mileage) {
     Integer integerMileage = null;
     if (mileage != null) {
       integerMileage = new Integer(Integer.parseInt(mileage));
@@ -180,7 +179,7 @@ public class Fillup {
    * Sets the price
    * @param price The price to set
    */
-  public void setPrice(BigDecimal price) {
+  public void setPrice(final BigDecimal price) {
     this.price = price;
   }
   
@@ -188,7 +187,7 @@ public class Fillup {
    * Sets the price
    * @param priceString The price to set
    */
-  public void setPriceFromString(String priceString) {
+  public void setPriceFromString(final String priceString) {
     this.setPrice(BigDecimalUtils.parseForDecimalLength(priceString, 3));
   }
   
@@ -196,7 +195,7 @@ public class Fillup {
    * Sets the volume
    * @param volume The volume to set
    */
-  public void setVolume(BigDecimal volume) {
+  public void setVolume(final BigDecimal volume) {
     this.volume = volume;
   }
   
@@ -204,7 +203,7 @@ public class Fillup {
    * Sets the volume
    * @param volumeString The volume to set
    */
-  public void setVolumeFromString(String volumeString) {
+  public void setVolumeFromString(final String volumeString) {
     this.setVolume(BigDecimalUtils.parseForDecimalLength(volumeString, 3));
   }
 }
