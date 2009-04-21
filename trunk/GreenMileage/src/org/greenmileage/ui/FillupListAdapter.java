@@ -1,19 +1,19 @@
 package org.greenmileage.ui;
 
-import org.greenmileage.data.FillupStatistics;
-import org.greenmileage.data.FillupUtils;
-import org.greenmileage.util.BigDecimalUtils;
-import org.greenmileage.util.IntegerUtils;
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import org.greenmileage.R;
 import org.greenmileage.data.Fillup;
+import org.greenmileage.data.FillupStatistics;
+import org.greenmileage.data.FillupUtils;
+import org.greenmileage.util.BigDecimalUtils;
+import org.greenmileage.util.IntegerUtils;
 
 /**
  * Adapts fillups to a list
@@ -23,16 +23,15 @@ import org.greenmileage.data.Fillup;
  * @since 0.0.1
  */
 public class FillupListAdapter extends CursorAdapter {
-  private static final DateFormat DATE_FORMAT = new SimpleDateFormat(
-      "MM-dd-yyyy");
-  private Context context;
+  private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd-yyyy");
+  private final Context context;
   
   /**
    * Creates a fillup list adapter
    * @param cursor The cursor from which to retrieve fillups
    * @param context The context
    */
-  public FillupListAdapter(Context context, Cursor cursor) {
+  public FillupListAdapter(final Context context, final Cursor cursor) {
     super(context, cursor);
     this.context = context;
   }
@@ -41,12 +40,11 @@ public class FillupListAdapter extends CursorAdapter {
    * @see CursorAdapter#bindView(View, Context, android.database.Cursor)
    */
   @Override
-  public void bindView(View view, Context context, Cursor cursor) {
-    Fillup fillup = FillupUtils.readFromCursor(cursor);
-    TextView dateText = (TextView)view.findViewById(R.id.date);
+  public void bindView(final View view, final Context context, final Cursor cursor) {
+    final Fillup fillup = FillupUtils.readFromCursor(cursor);
+    final TextView dateText = (TextView) view.findViewById(R.id.date);
     dateText.setText(DATE_FORMAT.format(fillup.getDate()));
-    StringBuilder summary = new StringBuilder().
-        append(IntegerUtils.toString(fillup.getMileage())). //
+    StringBuilder summary = new StringBuilder().append(IntegerUtils.toString(fillup.getMileage())). //
         append(context.getString(R.string.message_distanceAbbreviation)). //
         append(" "). //
         append(context.getString(R.string.message_for)). //
@@ -62,10 +60,9 @@ public class FillupListAdapter extends CursorAdapter {
         append(context.getString(R.string.message_per)). //
         append(" "). //
         append(context.getString(R.string.message_volumeUnit));
-    TextView summaryText = (TextView)view.findViewById(R.id.summary);
+    final TextView summaryText = (TextView) view.findViewById(R.id.summary);
     summaryText.setText(summary.toString());
-    TextView mileageSummaryText = (TextView)view.findViewById(R.id.
-        mileageSummary);
+    final TextView mileageSummaryText = (TextView) view.findViewById(R.id.mileageSummary);
     if ((fillup.getVolume() != null) && (fillup.getMileage() != null)) {
       try {
         cursor.moveToNext();
@@ -73,14 +70,11 @@ public class FillupListAdapter extends CursorAdapter {
           mileageSummaryText.setVisibility(View.GONE);
         }
         else {
-          Fillup previousFillup = FillupUtils.readFromCursor(cursor);
-          if ((previousFillup.getVolume() != null) && (previousFillup.
-              getMileage() != null)) {
+          final Fillup previousFillup = FillupUtils.readFromCursor(cursor);
+          if ((previousFillup.getVolume() != null) && (previousFillup.getMileage() != null)) {
             summary = new StringBuilder(). //
-                append(FillupStatistics.distancePerVolumeAsString(
-                    previousFillup, fillup)). //
-                append(context.getString(R.string.
-                    message_distancePerVolumeAbbreviation)). //
+                append(FillupStatistics.distancePerVolumeAsString(previousFillup, fillup)). //
+                append(context.getString(R.string.message_distancePerVolumeAbbreviation)). //
                 append(" "). //
                 append(context.getString(R.string.message_sinceLastFillup));
             mileageSummaryText.setText(summary);
@@ -104,7 +98,7 @@ public class FillupListAdapter extends CursorAdapter {
    * @see CursorAdapter#newView(Context, Cursor, android.view.ViewGroup)
    */
   @Override
-  public View newView(Context context, Cursor cursor, ViewGroup parent) {
+  public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
     return View.inflate(this.context, R.layout.fillup_list_item, null);
   }
 }
