@@ -1,6 +1,5 @@
 package org.greenmileage;
 
-import android.text.method.DigitsKeyListener;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -11,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,7 +54,8 @@ public class FillupEditor extends Activity {
   private Cursor cursor;
   private TextView dateDisplay;
   private final OnDateSetListener dateSetListener = new OnDateSetListener() {
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+    public void onDateSet(final DatePicker view, final int year, final int monthOfYear,
+        final int dayOfMonth) {
       FillupEditor.this.fillupYear = year;
       FillupEditor.this.fillupMonth = monthOfYear;
       FillupEditor.this.fillupDay = dayOfMonth;
@@ -80,8 +81,8 @@ public class FillupEditor extends Activity {
   }
   
   /**
-   * Take care of canceling work on a fillup. Deletes the fillup if we had created it, otherwise
-   * reverts to the original fillup.
+   * Cancels work on a fillup. If inserting, delete any saved data. If editing, revert to the
+   * original fillup.
    */
   private final void cancelFillup() {
     if (this.cursor != null) {
@@ -128,7 +129,7 @@ public class FillupEditor extends Activity {
     return this.getTextValue(this.priceText);
   }
   
-  private String getTextValue(EditText textField) {
+  private String getTextValue(final EditText textField) {
     return textField.getText().toString();
   }
   
@@ -140,7 +141,7 @@ public class FillupEditor extends Activity {
    * @see android.app.Activity#onCreate(android.os.Bundle)
    */
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     final Intent intent = this.getIntent();
     String action = intent.getAction();
@@ -183,25 +184,25 @@ public class FillupEditor extends Activity {
       this.fillupMonth = c.get(Calendar.MONTH);
       this.fillupDay = c.get(Calendar.DAY_OF_MONTH);
     }
-    this.dateDisplay = (TextView)this.findViewById(R.id.date);
-    this.volumeText = (EditText)this.findViewById(R.id.volume);
+    this.dateDisplay = (TextView) this.findViewById(R.id.date);
+    this.volumeText = (EditText) this.findViewById(R.id.volume);
     this.volumeText.addTextChangedListener(new DecimalTextWatcher());
-    this.mileageText = (EditText)this.findViewById(R.id.mileage);
-    this.priceText = (EditText)this.findViewById(R.id.price);
+    this.mileageText = (EditText) this.findViewById(R.id.mileage);
+    this.priceText = (EditText) this.findViewById(R.id.price);
     this.priceText.addTextChangedListener(new DecimalTextWatcher());
     this.updateDateDisplay();
-    final Button pickDateButton = (Button)this.findViewById(R.id.pickDate);
+    final Button pickDateButton = (Button) this.findViewById(R.id.pickDate);
     pickDateButton.setOnClickListener(new ShowDialogClickListener(this, DIALOG_DATE_ID));
-    final ImageButton pickVolumeButton = (ImageButton)this.findViewById(R.id.pickVolume);
+    final ImageButton pickVolumeButton = (ImageButton) this.findViewById(R.id.pickVolume);
     pickVolumeButton.setOnClickListener(new ShowDialogClickListener(this, DIALOG_VOLUME_ID));
-    final ImageButton pickMileageButton = (ImageButton)this.findViewById(R.id.pickMileage);
+    final ImageButton pickMileageButton = (ImageButton) this.findViewById(R.id.pickMileage);
     pickMileageButton.setOnClickListener(new ShowDialogClickListener(this, DIALOG_ODOMETER_ID));
-    final ImageButton pickPriceButton = (ImageButton)this.findViewById(R.id.pickPrice);
+    final ImageButton pickPriceButton = (ImageButton) this.findViewById(R.id.pickPrice);
     pickPriceButton.setOnClickListener(new ShowDialogClickListener(this, DIALOG_PRICE_ID));
-    this.saveButton = (Button)this.findViewById(R.id.save);
+    this.saveButton = (Button) this.findViewById(R.id.save);
     this.saveButton.setOnClickListener(new OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(final View v) {
         FillupEditor.this.finish();
       }
     });
@@ -211,28 +212,27 @@ public class FillupEditor extends Activity {
    * @see android.app.Activity#onCreateDialog(int)
    */
   @Override
-  protected Dialog onCreateDialog(int id) {
+  protected Dialog onCreateDialog(final int id) {
     if (id == DIALOG_DATE_ID) {
       return new DatePickerDialog(this, this.dateSetListener, this.fillupYear, this.fillupMonth,
           this.fillupDay);
     }
     else if (id == DIALOG_VOLUME_ID) {
-      NumericDialog dialog =
+      final NumericDialog dialog =
           new NumericDialog(this, this.getVolume(), new TextViewCallbackListener(this.volumeText));
       dialog.addTextWatcher(new DecimalTextWatcher());
       dialog.setTitle(this.getString(R.string.title_volumeUnits));
       return dialog;
     }
     else if (id == DIALOG_ODOMETER_ID) {
-      NumericDialog dialog =
-          new NumericDialog(this, this.getMileage(), new TextViewCallbackListener(this.
-              mileageText));
+      final NumericDialog dialog =
+          new NumericDialog(this, this.getMileage(), new TextViewCallbackListener(this.mileageText));
       dialog.setInputFilter(new DigitsKeyListener());
       dialog.setTitle(this.getString(R.string.title_odometer));
       return dialog;
     }
     else if (id == DIALOG_PRICE_ID) {
-      NumericDialog dialog =
+      final NumericDialog dialog =
           new NumericDialog(this, this.getPrice(), new TextViewCallbackListener(this.priceText));
       dialog.addTextWatcher(new DecimalTextWatcher());
       dialog.setTitle(this.getString(R.string.title_pricePerVolumeUnit));
@@ -245,7 +245,7 @@ public class FillupEditor extends Activity {
    * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
    */
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  public boolean onCreateOptionsMenu(final Menu menu) {
     super.onCreateOptionsMenu(menu);
     // Build the menus that are shown when editing.
     if (this.state == STATE_EDIT) {
@@ -279,7 +279,7 @@ public class FillupEditor extends Activity {
    * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
    */
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(final MenuItem item) {
     // Handle all of the possible menu actions.
     switch (item.getItemId()) {
       case MENU_DELETE_ID:
@@ -322,18 +322,18 @@ public class FillupEditor extends Activity {
    * @see android.app.Activity#onPrepareDialog(int, android.app.Dialog)
    */
   @Override
-  protected void onPrepareDialog(int id, Dialog dialogIn) {
+  protected void onPrepareDialog(final int id, final Dialog dialogIn) {
     super.onPrepareDialog(id, dialogIn);
     if (id == DIALOG_VOLUME_ID) {
-      NumericDialog dialog = (NumericDialog)dialogIn;
+      final NumericDialog dialog = (NumericDialog) dialogIn;
       dialog.setValue(this.getVolume());
     }
     else if (id == DIALOG_ODOMETER_ID) {
-      NumericDialog dialog = (NumericDialog)dialogIn;
+      final NumericDialog dialog = (NumericDialog) dialogIn;
       dialog.setValue(this.getMileage());
     }
     else if (id == DIALOG_PRICE_ID) {
-      NumericDialog dialog = (NumericDialog)dialogIn;
+      final NumericDialog dialog = (NumericDialog) dialogIn;
       dialog.setValue(this.getPrice());
     }
   }
@@ -387,8 +387,8 @@ public class FillupEditor extends Activity {
    * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
    */
   @Override
-  protected void onSaveInstanceState(Bundle outState) {
-    this.originalFillup.setIDFromString(uri.getPathSegments().get(1));
+  protected void onSaveInstanceState(final Bundle outState) {
+    this.originalFillup.setIDFromString(this.uri.getPathSegments().get(1));
     this.originalFillup.saveToBundle(outState, ORIGINAL_FILLUP);
     outState.putParcelable("uri", this.uri);
     outState.putInt("state", this.state);
