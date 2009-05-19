@@ -8,5 +8,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/GreenMileage/lib/junit/4.6/junit-4.6-doc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
