@@ -21,13 +21,25 @@ public class SQLUtils {
     if (ArrayUtils.isZeroLength(conditions)) {
       return null;
     }
-    else if (conditions.length == 1) {
+    if (conditions.length == 1) {
       final String condition = conditions[0];
       if (TextUtils.isEmpty(condition)) {
         return null;
       }
       return condition;
     }
-    return null;
+    final StringBuilder result = new StringBuilder();
+    for (final String condition : conditions) {
+      if (!TextUtils.isEmpty(condition)) {
+        if (result.length() != 0) {
+          result.append(" AND ");
+        }
+        result.append(condition);
+      }
+    }
+    if (result.length() == 0) {
+      return null;
+    }
+    return result.toString();
   }
 }
