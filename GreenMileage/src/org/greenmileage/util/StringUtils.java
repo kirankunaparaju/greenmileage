@@ -8,19 +8,26 @@ package org.greenmileage.util;
  * @since 0.0.1
  */
 public class StringUtils {
+  /**
+   * An empty string
+   */
+  public static final String EMPTY = "";
   
   /**
-   * <p>Converts an empty string to a null</p>
+   * <p>
+   * Converts an empty string to a null
+   * </p>
+   * 
    * <pre>
    * null = null
-   * "" = null
-   * " " = " "
-   * "a" = "a"
+   * &quot;&quot; = null
+   * &quot; &quot; = &quot; &quot;
+   * &quot;a&quot; = &quot;a&quot;
    * </pre>
    * @param s The string to test
    * @return Null if the string was null or empty, otherwise the input string
    */
-  public static String nullEmpty(String s) {
+  public static String nullEmpty(final String s) {
     if (s == null) {
       return null;
     }
