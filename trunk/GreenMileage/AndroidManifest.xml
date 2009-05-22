@@ -60,5 +60,9 @@ Since: 0.0.1
         <data android:mimeType="vnd.android.cursor.item/vnd.greenmileage.fillup" />
       </intent-filter>
     </activity>
+    <uses-library android:name="android.test.runner" />
   </application>
+  <instrumentation android:functionalTest="false" android:targetPackage="org.greenmileage"
+      android:label="Green Mileage unit tests" android:name="android.test.InstrumentationTestRunner"
+      android:handleProfiling="false" />
 </manifest> 
