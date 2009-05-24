@@ -8,8 +8,8 @@ import junit.framework.TestCase;
  * @see BigDecimalUtils
  * @author Connor Garvey
  * @created Apr 19, 2009 7:56:33 PM
- * @version 0.0.1
- * @since 0.0.1
+ * @version 0.0.5
+ * @since 0.0.5
  */
 public class TestBigDecimalUtils extends TestCase {
   /**

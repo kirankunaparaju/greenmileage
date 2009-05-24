@@ -4,8 +4,8 @@ package org.greenmileage.util;
  * Helps work with arrays
  * @author Connor Garvey
  * @created May 22, 2009 9:59:00 AM
- * @version 0.0.1
- * @since 0.0.1
+ * @version 0.0.5
+ * @since 0.0.5
  */
 public class ArrayUtils {
   /**
