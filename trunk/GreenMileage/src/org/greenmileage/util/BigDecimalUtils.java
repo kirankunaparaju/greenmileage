@@ -1,5 +1,6 @@
 package org.greenmileage.util;
 
+import android.text.TextUtils;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -46,7 +47,7 @@ public class BigDecimalUtils {
    * @return The value as a big decimal or null if the input value was null
    */
   public static BigDecimal parseForDecimalLength(final String value, final int decimals) {
-    if (value == null) {
+    if (TextUtils.isEmpty(value)) {
       return null;
     }
     return new BigDecimal(value, new MathContext(calculatePrecision(value, decimals)));
