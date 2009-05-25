@@ -9,7 +9,7 @@ import android.content.ContentValues;
  * Helps work with {@link ContentValues}
  * @author Connor Garvey
  * @created Nov 22, 2008, 10:11:41 PM
- * @version 0.0.1
+ * @version 0.0.5
  * @since 0.0.1
  */
 public class ContentValuesUtils {
@@ -22,6 +22,9 @@ public class ContentValuesUtils {
    */
   public static void nullEmpty(final ContentValues values, final String key)
       throws ClassCastException {
+    if (key == null) {
+      throw new IllegalArgumentException("key can't be null");
+    }
     if (values == null) {
       throw new IllegalArgumentException("values can't be null");
     }
@@ -42,6 +45,9 @@ public class ContentValuesUtils {
    */
   public static void nullEmpty(final ContentValues values, final String... keys)
       throws ClassCastException {
+    if (keys == null) {
+      throw new IllegalArgumentException("keys can't be null");
+    }
     for (final String key : keys) {
       nullEmpty(values, key);
     }
