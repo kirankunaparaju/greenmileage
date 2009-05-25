@@ -8,13 +8,10 @@ import java.math.MathContext;
  * Helps work with big decimals
  * @author Connor Garvey
  * @created Nov 22, 2008, 1:09:26 AM
- * @version 0.0.1
+ * @version 0.0.5
  * @since 0.0.1
  */
 public class BigDecimalUtils {
-  private BigDecimalUtils() {
-  }
-  
   /**
    * Calculates precision by counting the number of integer digits in <code>value</code> and adding
    * the specified number of decimal digits
@@ -60,5 +57,8 @@ public class BigDecimalUtils {
    */
   public static String toString(final BigDecimal value) {
     return value == null ? "" : value.toString();
+  }
+  
+  private BigDecimalUtils() {
   }
 }
