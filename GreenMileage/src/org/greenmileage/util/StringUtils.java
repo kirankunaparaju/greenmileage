@@ -4,7 +4,7 @@ package org.greenmileage.util;
  * Helps work with {@link String}s
  * @author Connor Garvey
  * @created Nov 22, 2008, 10:19:01 PM
- * @version 0.0.1
+ * @version 0.0.5
  * @since 0.0.1
  */
 public class StringUtils {
@@ -31,7 +31,7 @@ public class StringUtils {
     if (s == null) {
       return null;
     }
-    if ("".equals(s)) {
+    if (StringUtils.EMPTY.equals(s)) {
       return null;
     }
     return s;
