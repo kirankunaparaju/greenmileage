@@ -26,7 +26,7 @@ public class SQLUtils {
       if (TextUtils.isEmpty(condition)) {
         return null;
       }
-      return condition;
+      return '(' + condition + ')';
     }
     final StringBuilder result = new StringBuilder();
     for (final String condition : conditions) {
@@ -34,7 +34,7 @@ public class SQLUtils {
         if (result.length() != 0) {
           result.append(" AND ");
         }
-        result.append(condition);
+        result.append('(' + condition + ')');
       }
     }
     if (result.length() == 0) {

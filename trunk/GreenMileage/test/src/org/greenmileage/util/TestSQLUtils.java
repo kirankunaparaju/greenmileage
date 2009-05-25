@@ -35,21 +35,21 @@ public class TestSQLUtils extends TestCase {
    * @see SQLUtils#buildWhere(String...)
    */
   public void testBuildWhereNullString() {
-    assertEquals("a='1'", SQLUtils.buildWhere((String)null, "a='1'"));
+    assertEquals("(a='1')", SQLUtils.buildWhere((String)null, "a='1'"));
   }
   
   /**
    * @see SQLUtils#buildWhere(String...)
    */
   public void testBuildWhereNullStringNull() {
-    assertEquals("a='1'", SQLUtils.buildWhere((String)null, "a='1'", null));
+    assertEquals("(a='1')", SQLUtils.buildWhere((String)null, "a='1'", null));
   }
   
   /**
    * @see SQLUtils#buildWhere(String...)
    */
   public void testBuildWhereOne() {
-    assertEquals("a='1'", SQLUtils.buildWhere("a='1'"));
+    assertEquals("(a='1')", SQLUtils.buildWhere("a='1'"));
   }
   
   /**
@@ -63,27 +63,27 @@ public class TestSQLUtils extends TestCase {
    * @see SQLUtils#buildWhere(String...)
    */
   public void testBuildWhereStringNull() {
-    assertEquals("a='1'", SQLUtils.buildWhere("a='1'", (String)null));
+    assertEquals("(a='1')", SQLUtils.buildWhere("a='1'", (String)null));
   }
   
   /**
    * @see SQLUtils#buildWhere(String...)
    */
   public void testBuildWhereStringNullString() {
-    assertEquals("a='1' AND b='2'", SQLUtils.buildWhere("a='1'", null, "b='2'"));
+    assertEquals("(a='1') AND (b='2')", SQLUtils.buildWhere("a='1'", null, "b='2'"));
   }
   
   /**
    * @see SQLUtils#buildWhere(String...)
    */
   public void testBuildWhereThree() {
-    assertEquals("a='1' AND b='2' AND c='3'", SQLUtils.buildWhere("a='1'", "b='2'", "c='3'"));
+    assertEquals("(a='1') AND (b='2') AND (c='3')", SQLUtils.buildWhere("a='1'", "b='2'", "c='3'"));
   }
   
   /**
    * @see SQLUtils#buildWhere(String...)
    */
   public void testBuildWhereTwo() {
-    assertEquals("a='1' AND b='2'", SQLUtils.buildWhere("a='1'", "b='2'"));
+    assertEquals("(a='1') AND (b='2')", SQLUtils.buildWhere("a='1'", "b='2'"));
   }
 }
