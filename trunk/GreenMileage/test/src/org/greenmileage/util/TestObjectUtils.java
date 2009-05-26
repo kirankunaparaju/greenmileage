@@ -64,4 +64,59 @@ public class TestObjectUtils extends TestCase {
   public void testAllAreNotNullOneNull() {
     assertFalse(ObjectUtils.allAreNotNull((Object)null));
   }
+  
+  /**
+   * @see ObjectUtils#allAreNotNull(Object...)
+   */
+  public void testAnyIsNullMultipleNotNull() {
+    assertFalse(ObjectUtils.anyIsNull(new Object(), new Object()));
+  }
+  
+  /**
+   * @see ObjectUtils#allAreNotNull(Object...)
+   */
+  public void testAnyIsNullMultipleNull() {
+    assertTrue(ObjectUtils.anyIsNull((Object)null, (Object)null));
+  }
+  
+  /**
+   * @see ObjectUtils#allAreNotNull(Object...)
+   */
+  public void testAnyIsNullNotNullNull() {
+    assertTrue(ObjectUtils.anyIsNull(new Object(), (Object)null));
+  }
+  
+  /**
+   * @see ObjectUtils#allAreNotNull(Object...)
+   */
+  public void testAnyIsNullNull() {
+    try {
+      ObjectUtils.anyIsNull((Object[])null);
+    }
+    catch (final IllegalArgumentException ex) {
+      return;
+    }
+    fail("Did not throw IllegalArgumentException");
+  }
+  
+  /**
+   * @see ObjectUtils#allAreNotNull(Object...)
+   */
+  public void testAnyIsNullNullNotNull() {
+    assertTrue(ObjectUtils.anyIsNull((Object)null, new Object()));
+  }
+  
+  /**
+   * @see ObjectUtils#allAreNotNull(Object...)
+   */
+  public void testAnyIsNullOneNotNull() {
+    assertFalse(ObjectUtils.anyIsNull(new Object()));
+  }
+  
+  /**
+   * @see ObjectUtils#allAreNotNull(Object...)
+   */
+  public void testAnyIsNullOneNull() {
+    assertTrue(ObjectUtils.anyIsNull((Object)null));
+  }
 }
