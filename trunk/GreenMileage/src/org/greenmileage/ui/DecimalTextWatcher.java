@@ -1,9 +1,9 @@
 package org.greenmileage.ui;
 
-import java.util.HashSet;
-import java.util.Set;
 import android.text.Editable;
 import android.text.TextWatcher;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A text watcher that places a decimal point in a number and ignores characters
@@ -14,9 +14,6 @@ import android.text.TextWatcher;
  */
 public class DecimalTextWatcher implements TextWatcher {
   private static final Set<Character> DIGITS;
-  private char decimalChar = '.';
-  private int decimalDigits = 3;
-  
   static {
     DIGITS = new HashSet<Character>();
     DIGITS.add('0');
@@ -30,18 +27,20 @@ public class DecimalTextWatcher implements TextWatcher {
     DIGITS.add('8');
     DIGITS.add('9');
   }
+  private final char decimalChar = '.';
+  private int decimalDigits = 3;
   
   /**
    * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
    */
   @Override
-  public void afterTextChanged(Editable s) {
+  public void afterTextChanged(final Editable s) {
     if (this.validate(s)) {
       return;
     }
-    StringBuilder digits = new StringBuilder();
+    final StringBuilder digits = new StringBuilder();
     for (int i = 0; i < s.length(); ++i) {
-      char c = s.charAt(i);
+      final char c = s.charAt(i);
       if (DIGITS.contains(c)) {
         digits.append(c);
       }
@@ -55,15 +54,36 @@ public class DecimalTextWatcher implements TextWatcher {
       s.replace(0, s.length(), digits.toString());
       return;
     }
-    int decimalIndex = digits.length() - this.decimalDigits;
-    StringBuilder decimal = new StringBuilder().
-        append(digits.substring(0, decimalIndex)).
-        append(this.decimalChar).
-        append(digits.substring(decimalIndex));
+    final int decimalIndex = digits.length() - this.decimalDigits;
+    final StringBuilder decimal = new StringBuilder().append(digits.substring(0, decimalIndex))
+        .append(this.decimalChar).append(digits.substring(decimalIndex));
     s.replace(0, s.length(), decimal.toString());
   }
   
-  private void removePrecedingZeroes(StringBuilder number) {
+  /**
+   * @see TextWatcher#beforeTextChanged(java.lang.CharSequence, int, int, int)
+   */
+  @Override
+  public void beforeTextChanged(final CharSequence s, final int start, final int count,
+      final int after) {
+  }
+  
+  /**
+   * The number of digits to keep to the right of the decimal
+   * @return the decimalDigits
+   */
+  public int getDecimalDigits() {
+    return this.decimalDigits;
+  }
+  
+  /**
+   * @see TextWatcher#onTextChanged(java.lang.CharSequence, int, int, int)
+   */
+  @Override
+  public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+  }
+  
+  private void removePrecedingZeroes(final StringBuilder number) {
     for (int i = 0; i < number.length(); ++i) {
       if (number.charAt(i) == '0') {
         number.deleteCharAt(i--);
@@ -74,11 +94,19 @@ public class DecimalTextWatcher implements TextWatcher {
     }
   }
   
-  private boolean validate(Editable s) {
+  /**
+   * The number of digits to keep to the right of the decimal
+   * @param decimalDigits the decimalDigits to set
+   */
+  public void setDecimalDigits(final int decimalDigits) {
+    this.decimalDigits = decimalDigits;
+  }
+  
+  private boolean validate(final Editable s) {
     if (s.length() < this.decimalDigits + 1) {
       return false;
     }
-    int dotIndex = s.length() - (this.decimalDigits + 1);
+    final int dotIndex = s.length() - (this.decimalDigits + 1);
     for (int i = s.length() - 1; i > -1; --i) {
       if (i == dotIndex) {
         if (s.charAt(i) != '.') {
@@ -92,20 +120,5 @@ public class DecimalTextWatcher implements TextWatcher {
       }
     }
     return true;
-  }
-  
-  /**
-   * @see TextWatcher#beforeTextChanged(java.lang.CharSequence, int, int, int)
-   */
-  @Override
-  public void beforeTextChanged(CharSequence s, int start, int count, int
-      after) {
-  }
-  
-  /**
-   * @see TextWatcher#onTextChanged(java.lang.CharSequence, int, int, int)
-   */
-  @Override
-  public void onTextChanged(CharSequence s, int start, int before, int count) {
   }
 }
