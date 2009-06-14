@@ -9,13 +9,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.greenmileage.GreenMileageDefinitions.Fillups;
+import org.greenmileage.android.NullableBundle;
 import org.greenmileage.util.BigDecimalUtils;
 
 /**
  * Creates a fillup
  * @author Connor Garvey
  * @created Nov 15, 2008, 10:23:06 AM
- * @version 0.0.3
+ * @version 0.0.5
  * @since 0.0.1
  */
 public class Fillup {
@@ -80,17 +81,18 @@ public class Fillup {
   
   /**
    * Writes a fillup to a bundle
-   * @param bundle The bundle to which to write
+   * @param bundleIn The bundle to which to write
    * @param key The key identifying the values in the bundle. This key will be used as a prefix for
    *        bundle values.
    */
-  public void saveToBundle(final Bundle bundle, final String key) {
-    BundleUtils.putString(key + Fillups.AUTOMOBILE, this.getAutomobile(), bundle);
-    BundleUtils.putLong(key + Fillups.DATE, this.getDate().getTime(), bundle);
-    BundleUtils.putInt(key + Fillups.MILEAGE, this.getMileage(), bundle);
-    BundleUtils.putObjectToString(key + Fillups.PRICE, this.getPrice(), bundle);
-    BundleUtils.putObjectToString(key + Fillups.VOLUME, this.getVolume(), bundle);
-    BundleUtils.putLong(key + BaseColumns._ID, this.getID(), bundle);
+  public void saveToBundle(final Bundle bundleIn, final String key) {
+    final NullableBundle bundle = new NullableBundle(bundleIn);
+    bundle.putString(key + Fillups.AUTOMOBILE, this.getAutomobile());
+    bundle.putLong(key + Fillups.DATE, this.getDate().getTime());
+    bundle.putInt(key + Fillups.MILEAGE, this.getMileage());
+    bundle.putObjectToString(key + Fillups.PRICE, this.getPrice());
+    bundle.putObjectToString(key + Fillups.VOLUME, this.getVolume());
+    bundle.putLong(key + BaseColumns._ID, this.getID());
   }
   
   /**

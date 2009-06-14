@@ -5,6 +5,7 @@ package org.greenmileage.util;
  * @author Connor Garvey
  * @created Jun 13, 2009 11:06:42 AM
  * @version 0.0.5
+ * @param <T> The type of the result
  * @since 0.0.5
  */
 public class EmptyCallbackListener<T> implements CallbackListener<T> {
