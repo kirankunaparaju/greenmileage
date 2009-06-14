@@ -18,7 +18,7 @@ import org.greenmileage.util.CallbackListener;
  * A dialog allowing numeric input
  * @author Connor Garvey
  * @created Jan 10, 2009, 11:08:51 PM
- * @version 0.0.4
+ * @version 0.0.5
  * @since 0.0.4
  */
 public class NumericDialog extends AlertDialog {
@@ -129,6 +129,9 @@ public class NumericDialog extends AlertDialog {
       public void onClick(final View v) {
         final TextView number = NumericDialog.this.numberText;
         final CharSequence text = number.getText();
+        if (text.length() == 0) {
+          return;
+        }
         // This is annoyingly ugly, but is from the Android source
         if (!(text instanceof Editable)) {
           number.setText(text, BufferType.EDITABLE);
