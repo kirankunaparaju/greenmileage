@@ -14,7 +14,7 @@ import org.greenmileage.util.StringUtils;
  * @version 0.0.5
  * @since 0.0.5
  */
-public class TestDecimalTextWatcher extends InstrumentationTestCase {
+public class DecimalTextWatcherTest extends InstrumentationTestCase {
   private DecimalTextWatcher createDecimalTextWatcher() {
     final DecimalTextWatcher watcher = new DecimalTextWatcher();
     watcher.setDecimalDigits(3);
