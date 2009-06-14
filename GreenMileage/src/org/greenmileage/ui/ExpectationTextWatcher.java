@@ -50,4 +50,13 @@ public class ExpectationTextWatcher implements TextWatcher {
   @Override
   public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
   }
+  
+  /**
+   * Ensures that all expectations were met
+   */
+  public void validate() {
+    if (!this.expectations.isEmpty()) {
+      Assert.fail("Expected text changes that didn't happen: " + this.expectations.toString());
+    }
+  }
 }
