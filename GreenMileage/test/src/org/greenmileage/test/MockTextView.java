@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class MockTextView extends TextView {
   /**
    * Creates a mock text view
-   * @param context
+   * @param context the context for the mock text view
    */
   public MockTextView(final Context context) {
     super(context);
