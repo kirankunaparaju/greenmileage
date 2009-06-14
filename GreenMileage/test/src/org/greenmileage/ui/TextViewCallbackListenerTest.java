@@ -3,6 +3,7 @@ package org.greenmileage.ui;
 import android.test.InstrumentationTestCase;
 import android.widget.TextView;
 import org.greenmileage.test.MockTextView;
+import org.greenmileage.util.StringUtils;
 
 /**
  * @see TextViewCallbackListener
@@ -11,7 +12,7 @@ import org.greenmileage.test.MockTextView;
  * @version 0.0.5
  * @since 0.0.5
  */
-public class TestTextViewCallbackListener extends InstrumentationTestCase {
+public class TextViewCallbackListenerTest extends InstrumentationTestCase {
   /**
    * @see TextViewCallbackListener#TextViewCallbackListener(android.widget.TextView)
    */
@@ -28,7 +29,18 @@ public class TestTextViewCallbackListener extends InstrumentationTestCase {
   /**
    * @see TextViewCallbackListener#onResult(String)
    */
-  public void testOnResult() {
+  public void testOnResultNull() {
+    final TextView textView = new MockTextView(this.getInstrumentation().getContext());
+    final String expected = null;
+    final TextViewCallbackListener listener = new TextViewCallbackListener(textView);
+    listener.onResult(expected);
+    assertEquals(StringUtils.EMPTY, textView.getText());
+  }
+  
+  /**
+   * @see TextViewCallbackListener#onResult(String)
+   */
+  public void testOnResultString() {
     final TextView textView = new MockTextView(this.getInstrumentation().getContext());
     final String expected = "expected";
     final TextViewCallbackListener listener = new TextViewCallbackListener(textView);
