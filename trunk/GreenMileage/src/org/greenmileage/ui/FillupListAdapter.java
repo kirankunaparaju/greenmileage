@@ -23,7 +23,12 @@ import org.greenmileage.util.IntegerUtils;
  * @since 0.0.1
  */
 public class FillupListAdapter extends CursorAdapter {
-  private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd-yyyy");
+  private static final String DATE_FORMAT_STRING = "MM-dd-yyyy";
+  
+  private static DateFormat createDateFormat() {
+    return new SimpleDateFormat(DATE_FORMAT_STRING);
+  }
+  
   private final Context context;
   
   /**
@@ -42,8 +47,8 @@ public class FillupListAdapter extends CursorAdapter {
   @Override
   public void bindView(final View view, final Context context, final Cursor cursor) {
     final Fillup fillup = FillupUtils.readFromCursor(cursor);
-    final TextView dateText = (TextView) view.findViewById(R.id.date);
-    dateText.setText(DATE_FORMAT.format(fillup.getDate()));
+    final TextView dateText = (TextView)view.findViewById(R.id.date);
+    dateText.setText(createDateFormat().format(fillup.getDate()));
     StringBuilder summary = new StringBuilder().append(IntegerUtils.toString(fillup.getMileage())). //
         append(context.getString(R.string.message_distanceAbbreviation)). //
         append(" "). //
@@ -60,9 +65,9 @@ public class FillupListAdapter extends CursorAdapter {
         append(context.getString(R.string.message_per)). //
         append(" "). //
         append(context.getString(R.string.message_volumeUnit));
-    final TextView summaryText = (TextView) view.findViewById(R.id.summary);
+    final TextView summaryText = (TextView)view.findViewById(R.id.summary);
     summaryText.setText(summary.toString());
-    final TextView mileageSummaryText = (TextView) view.findViewById(R.id.mileageSummary);
+    final TextView mileageSummaryText = (TextView)view.findViewById(R.id.mileageSummary);
     if ((fillup.getVolume() != null) && (fillup.getMileage() != null)) {
       try {
         cursor.moveToNext();

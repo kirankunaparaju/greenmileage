@@ -34,15 +34,6 @@ public class NullableBundle {
   }
   
   /**
-   * @return the bundle's clone
-   * @see android.os.Bundle#clone()
-   */
-  @Override
-  public Object clone() {
-    return this.bundle.clone();
-  }
-  
-  /**
    * @param key the key to find
    * @return true if the bundle contains the key, false otherwise
    * @see android.os.Bundle#containsKey(java.lang.String)
@@ -104,6 +95,13 @@ public class NullableBundle {
    */
   public boolean[] getBooleanArray(final String key) {
     return this.bundle.getBooleanArray(key);
+  }
+  
+  /**
+   * @return the bundle
+   */
+  public Bundle getBundle() {
+    return this.bundle;
   }
   
   /**

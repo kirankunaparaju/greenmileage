@@ -1,29 +1,30 @@
 package org.greenmileage.data;
 
-import android.content.ContentValues;
-import android.os.Bundle;
-import android.provider.BaseColumns;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.greenmileage.GreenMileageDefinitions.Fillups;
-import org.greenmileage.android.NullableBundle;
 import org.greenmileage.util.BigDecimalUtils;
 
 /**
- * Creates a fillup
+ * Holds information about a fillup
  * @author Connor Garvey
  * @created Nov 15, 2008, 10:23:06 AM
  * @version 0.0.5
  * @since 0.0.1
  */
 public class Fillup {
+  private static final String DATE_FORMAT_STRING = "yyyyMMdd";
+  
   /**
-   * The date format used when reading or writing fillups
+   * Gets a new date format used when reading or writing fillups
+   * @return a new date formatter
    */
-  public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
+  public static DateFormat createDateFormat() {
+    return new SimpleDateFormat(DATE_FORMAT_STRING);
+  }
+  
   private String automobile;
   private Date date;
   private Long iD;
@@ -80,35 +81,6 @@ public class Fillup {
   }
   
   /**
-   * Writes a fillup to a bundle
-   * @param bundleIn The bundle to which to write
-   * @param key The key identifying the values in the bundle. This key will be used as a prefix for
-   *        bundle values.
-   */
-  public void saveToBundle(final Bundle bundleIn, final String key) {
-    final NullableBundle bundle = new NullableBundle(bundleIn);
-    bundle.putString(key + Fillups.AUTOMOBILE, this.getAutomobile());
-    bundle.putLong(key + Fillups.DATE, this.getDate().getTime());
-    bundle.putInt(key + Fillups.MILEAGE, this.getMileage());
-    bundle.putObjectToString(key + Fillups.PRICE, this.getPrice());
-    bundle.putObjectToString(key + Fillups.VOLUME, this.getVolume());
-    bundle.putLong(key + BaseColumns._ID, this.getID());
-  }
-  
-  /**
-   * Saves the fillup to content values
-   * @param values The content values to which to save
-   */
-  public void saveToContentValues(final ContentValues values) {
-    values.put(Fillups.AUTOMOBILE, this.getAutomobile());
-    values.put(Fillups.DATE, this.getDate().getTime());
-    values.put(Fillups.MILEAGE, this.getMileage());
-    values.put(Fillups.PRICE, this.getPrice().toString());
-    values.put(Fillups.VOLUME, this.getVolume().toString());
-    values.put(BaseColumns._ID, this.getID());
-  }
-  
-  /**
    * Sets the automobile
    * @param automobile The automobile to set
    */
@@ -126,13 +98,13 @@ public class Fillup {
   
   /**
    * Sets the date from a string
-   * @param dateString The date to set, formatted using {@link #DATE_FORMAT}
+   * @param dateString The date to set, formatted using {@link #createDateFormat()}
    * @throws ParseException Thrown if the input date could not be parsed
    */
   public void setDateFromString(final String dateString) throws ParseException {
     Date date = null;
     if (dateString != null) {
-      date = DATE_FORMAT.parse(dateString);
+      date = createDateFormat().parse(dateString);
     }
     this.setDate(date);
   }
@@ -152,7 +124,7 @@ public class Fillup {
   public void setIDFromString(final String id) {
     Long longID = null;
     if (id != null) {
-      longID = new Long(Long.parseLong(id));
+      longID = Long.valueOf(Long.parseLong(id));
     }
     this.setID(longID);
   }
@@ -172,7 +144,7 @@ public class Fillup {
   public void setMileageFromString(final String mileage) {
     Integer integerMileage = null;
     if (mileage != null) {
-      integerMileage = new Integer(Integer.parseInt(mileage));
+      integerMileage = Integer.valueOf(Integer.parseInt(mileage));
     }
     this.setMileage(integerMileage);
   }
