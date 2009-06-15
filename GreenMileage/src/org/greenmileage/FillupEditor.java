@@ -90,7 +90,7 @@ public class FillupEditor extends Activity {
         this.cursor.close();
         this.cursor = null;
         final ContentValues values = new ContentValues();
-        this.originalFillup.saveToContentValues(values);
+        FillupUtils.saveToContentValues(this.originalFillup, values);
         this.getContentResolver().update(this.uri, values, null, null);
       }
       else if (this.state == STATE_INSERT) {
@@ -184,22 +184,22 @@ public class FillupEditor extends Activity {
       this.fillupMonth = c.get(Calendar.MONTH);
       this.fillupDay = c.get(Calendar.DAY_OF_MONTH);
     }
-    this.dateDisplay = (TextView) this.findViewById(R.id.date);
-    this.volumeText = (EditText) this.findViewById(R.id.volume);
+    this.dateDisplay = (TextView)this.findViewById(R.id.date);
+    this.volumeText = (EditText)this.findViewById(R.id.volume);
     this.volumeText.addTextChangedListener(new DecimalTextWatcher());
-    this.mileageText = (EditText) this.findViewById(R.id.mileage);
-    this.priceText = (EditText) this.findViewById(R.id.price);
+    this.mileageText = (EditText)this.findViewById(R.id.mileage);
+    this.priceText = (EditText)this.findViewById(R.id.price);
     this.priceText.addTextChangedListener(new DecimalTextWatcher());
     this.updateDateDisplay();
-    final Button pickDateButton = (Button) this.findViewById(R.id.pickDate);
+    final Button pickDateButton = (Button)this.findViewById(R.id.pickDate);
     pickDateButton.setOnClickListener(new ShowDialogClickListener(this, DIALOG_DATE_ID));
-    final ImageButton pickVolumeButton = (ImageButton) this.findViewById(R.id.pickVolume);
+    final ImageButton pickVolumeButton = (ImageButton)this.findViewById(R.id.pickVolume);
     pickVolumeButton.setOnClickListener(new ShowDialogClickListener(this, DIALOG_VOLUME_ID));
-    final ImageButton pickMileageButton = (ImageButton) this.findViewById(R.id.pickMileage);
+    final ImageButton pickMileageButton = (ImageButton)this.findViewById(R.id.pickMileage);
     pickMileageButton.setOnClickListener(new ShowDialogClickListener(this, DIALOG_ODOMETER_ID));
-    final ImageButton pickPriceButton = (ImageButton) this.findViewById(R.id.pickPrice);
+    final ImageButton pickPriceButton = (ImageButton)this.findViewById(R.id.pickPrice);
     pickPriceButton.setOnClickListener(new ShowDialogClickListener(this, DIALOG_PRICE_ID));
-    this.saveButton = (Button) this.findViewById(R.id.save);
+    this.saveButton = (Button)this.findViewById(R.id.save);
     this.saveButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(final View v) {
@@ -218,22 +218,22 @@ public class FillupEditor extends Activity {
           this.fillupDay);
     }
     else if (id == DIALOG_VOLUME_ID) {
-      final NumericDialog dialog =
-          new NumericDialog(this, this.getVolume(), new TextViewCallbackListener(this.volumeText));
+      final NumericDialog dialog = new NumericDialog(this, this.getVolume(),
+          new TextViewCallbackListener(this.volumeText));
       dialog.addTextWatcher(new DecimalTextWatcher());
       dialog.setTitle(this.getString(R.string.title_volumeUnits));
       return dialog;
     }
     else if (id == DIALOG_ODOMETER_ID) {
-      final NumericDialog dialog =
-          new NumericDialog(this, this.getMileage(), new TextViewCallbackListener(this.mileageText));
+      final NumericDialog dialog = new NumericDialog(this, this.getMileage(),
+          new TextViewCallbackListener(this.mileageText));
       dialog.setInputFilter(new DigitsKeyListener());
       dialog.setTitle(this.getString(R.string.title_odometer));
       return dialog;
     }
     else if (id == DIALOG_PRICE_ID) {
-      final NumericDialog dialog =
-          new NumericDialog(this, this.getPrice(), new TextViewCallbackListener(this.priceText));
+      final NumericDialog dialog = new NumericDialog(this, this.getPrice(),
+          new TextViewCallbackListener(this.priceText));
       dialog.addTextWatcher(new DecimalTextWatcher());
       dialog.setTitle(this.getString(R.string.title_pricePerVolumeUnit));
       return dialog;
@@ -325,15 +325,15 @@ public class FillupEditor extends Activity {
   protected void onPrepareDialog(final int id, final Dialog dialogIn) {
     super.onPrepareDialog(id, dialogIn);
     if (id == DIALOG_VOLUME_ID) {
-      final NumericDialog dialog = (NumericDialog) dialogIn;
+      final NumericDialog dialog = (NumericDialog)dialogIn;
       dialog.setValue(this.getVolume());
     }
     else if (id == DIALOG_ODOMETER_ID) {
-      final NumericDialog dialog = (NumericDialog) dialogIn;
+      final NumericDialog dialog = (NumericDialog)dialogIn;
       dialog.setValue(this.getMileage());
     }
     else if (id == DIALOG_PRICE_ID) {
-      final NumericDialog dialog = (NumericDialog) dialogIn;
+      final NumericDialog dialog = (NumericDialog)dialogIn;
       dialog.setValue(this.getPrice());
     }
   }
@@ -389,7 +389,7 @@ public class FillupEditor extends Activity {
   @Override
   protected void onSaveInstanceState(final Bundle outState) {
     this.originalFillup.setIDFromString(this.uri.getPathSegments().get(1));
-    this.originalFillup.saveToBundle(outState, ORIGINAL_FILLUP);
+    FillupUtils.saveToBundle(this.originalFillup, outState, ORIGINAL_FILLUP);
     outState.putParcelable("uri", this.uri);
     outState.putInt("state", this.state);
   }

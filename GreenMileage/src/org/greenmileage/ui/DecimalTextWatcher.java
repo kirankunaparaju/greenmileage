@@ -13,6 +13,7 @@ import java.util.Set;
  * @since 0.0.1
  */
 public class DecimalTextWatcher implements TextWatcher {
+  private static final char DECIMAL_CHARACTER = '.';
   private static final Set<Character> DIGITS;
   static {
     DIGITS = new HashSet<Character>();
@@ -27,7 +28,6 @@ public class DecimalTextWatcher implements TextWatcher {
     DIGITS.add('8');
     DIGITS.add('9');
   }
-  private final char decimalChar = '.';
   private int decimalDigits = 3;
   
   /**
@@ -50,13 +50,13 @@ public class DecimalTextWatcher implements TextWatcher {
       for (int i = digits.length(); i <= this.decimalDigits - 1; ++i) {
         digits.insert(0, '0');
       }
-      digits.insert(0, this.decimalChar);
+      digits.insert(0, DecimalTextWatcher.DECIMAL_CHARACTER);
       s.replace(0, s.length(), digits.toString());
       return;
     }
     final int decimalIndex = digits.length() - this.decimalDigits;
     final StringBuilder decimal = new StringBuilder().append(digits.substring(0, decimalIndex))
-        .append(this.decimalChar).append(digits.substring(decimalIndex));
+        .append(DecimalTextWatcher.DECIMAL_CHARACTER).append(digits.substring(decimalIndex));
     s.replace(0, s.length(), decimal.toString());
   }
   

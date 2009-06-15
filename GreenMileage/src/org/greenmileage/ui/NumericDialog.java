@@ -276,7 +276,7 @@ public class NumericDialog extends AlertDialog {
     this.numberText.setText(value);
   }
   
-  private class NumberButtonListener implements View.OnClickListener {
+  private static class NumberButtonListener implements View.OnClickListener {
     private final TextView field;
     private final String number;
     

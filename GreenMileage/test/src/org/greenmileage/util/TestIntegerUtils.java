@@ -14,7 +14,7 @@ public class TestIntegerUtils extends TestCase {
    * @see IntegerUtils#nullZero(Integer)
    */
   public void testNullZeroNegative() {
-    assertEquals(new Integer(-42), IntegerUtils.nullZero(-42));
+    assertEquals(Integer.valueOf(-42), IntegerUtils.nullZero(-42));
   }
   
   /**
@@ -28,7 +28,7 @@ public class TestIntegerUtils extends TestCase {
    * @see IntegerUtils#nullZero(Integer)
    */
   public void testNullZeroPositive() {
-    assertEquals(new Integer(42), IntegerUtils.nullZero(42));
+    assertEquals(Integer.valueOf(42), IntegerUtils.nullZero(42));
   }
   
   /**

@@ -14,7 +14,7 @@ public class TestLongUtils extends TestCase {
    * @see LongUtils#nullZero(Long)
    */
   public void testNullZeroNegative() {
-    assertEquals(new Long(-42), LongUtils.nullZero(-42L));
+    assertEquals(Long.valueOf(-42), LongUtils.nullZero(-42L));
   }
   
   /**
@@ -28,7 +28,7 @@ public class TestLongUtils extends TestCase {
    * @see LongUtils#nullZero(Long)
    */
   public void testNullZeroPositive() {
-    assertEquals(new Long(42), LongUtils.nullZero(42L));
+    assertEquals(Long.valueOf(42), LongUtils.nullZero(42L));
   }
   
   /**
