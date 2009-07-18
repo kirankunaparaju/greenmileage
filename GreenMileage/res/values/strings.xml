@@ -11,6 +11,7 @@ Since 0.0.1
 <string name="error_message_resume">There was a problem while resuming.  Please try reloading.</string>
 <string name="error_title_resume">Resume Error</string>
 <string name="label_date">Date:</string>
+<string name="label_distance">Miles:</string>
 <string name="label_distancePerVolume">MPG:</string>
 <string name="label_mileage">Odometer:</string>
 <string name="label_price">Price per gallon:</string>

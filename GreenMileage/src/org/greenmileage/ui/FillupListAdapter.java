@@ -10,7 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import org.greenmileage.R;
 import org.greenmileage.data.Fillup;
-import org.greenmileage.data.FillupStatistics;
+import org.greenmileage.data.FillupMath;
 import org.greenmileage.data.FillupUtils;
 import org.greenmileage.util.BigDecimalUtils;
 import org.greenmileage.util.IntegerUtils;
@@ -78,7 +78,7 @@ public class FillupListAdapter extends CursorAdapter {
           final Fillup previousFillup = FillupUtils.readFromCursor(cursor);
           if ((previousFillup.getVolume() != null) && (previousFillup.getMileage() != null)) {
             summary = new StringBuilder(). //
-                append(FillupStatistics.distancePerVolumeAsString(previousFillup, fillup)). //
+                append(FillupMath.distancePerVolumeAsString(previousFillup, fillup)). //
                 append(context.getString(R.string.message_distancePerVolumeAbbreviation)). //
                 append(" "). //
                 append(context.getString(R.string.message_sinceLastFillup));
