@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import org.greenmileage.R;
@@ -33,7 +34,7 @@ public class NumericDialog extends AlertDialog {
   private Button button7;
   private Button button8;
   private Button button9;
-  private Button buttonBack;
+  private ImageButton buttonBack;
   private Button buttonOK;
   private CallbackListener<String> callbackListener;
   private TextView numberText;
@@ -111,7 +112,7 @@ public class NumericDialog extends AlertDialog {
     this.button7 = (Button)view.findViewById(R.id.n7);
     this.button8 = (Button)view.findViewById(R.id.n8);
     this.button9 = (Button)view.findViewById(R.id.n9);
-    this.buttonBack = (Button)view.findViewById(R.id.back);
+    this.buttonBack = (ImageButton)view.findViewById(R.id.back);
     this.buttonOK = (Button)view.findViewById(R.id.ok);
     this.numberText.setText(initialValue);
     this.button0.setOnClickListener(new NumberButtonListener(this.numberText, "0"));
@@ -223,7 +224,7 @@ public class NumericDialog extends AlertDialog {
   /**
    * @return the buttonBack
    */
-  public Button getButtonBack() {
+  public ImageButton getButtonBack() {
     return this.buttonBack;
   }
   
