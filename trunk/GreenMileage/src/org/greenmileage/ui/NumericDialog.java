@@ -23,6 +23,21 @@ import org.greenmileage.util.CallbackListener;
  * @since 0.0.4
  */
 public class NumericDialog extends AlertDialog {
+  private static class NumberButtonListener implements View.OnClickListener {
+    private final TextView field;
+    private final String number;
+    
+    public NumberButtonListener(final TextView field, final String number) {
+      this.field = field;
+      this.number = number;
+    }
+    
+    @Override
+    public void onClick(final View v) {
+      this.field.append(this.number);
+    }
+  }
+  
   private static final String NUMBER = "number";
   private Button button0;
   private Button button1;
@@ -275,20 +290,5 @@ public class NumericDialog extends AlertDialog {
    */
   public void setValue(final String value) {
     this.numberText.setText(value);
-  }
-  
-  private static class NumberButtonListener implements View.OnClickListener {
-    private final TextView field;
-    private final String number;
-    
-    public NumberButtonListener(final TextView field, final String number) {
-      this.field = field;
-      this.number = number;
-    }
-    
-    @Override
-    public void onClick(final View v) {
-      this.field.append(this.number);
-    }
   }
 }
